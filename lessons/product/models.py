@@ -91,6 +91,10 @@ class ProductLessons(models.Model):
 
 
 class LessonStatus(models.Model):
+    '''
+    Модель для просмотра статуса урока.
+    '''
+
     user = models.ForeignKey(
         CustomUser,
         on_delete=models.CASCADE,
