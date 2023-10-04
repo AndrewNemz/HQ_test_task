@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import timedelta
 
 from users.models import CustomUser
 
@@ -16,6 +17,7 @@ class Lesson(models.Model):
         max_length=200,
     )
     duration = models.DurationField(
+        default=timedelta(seconds=0),
         verbose_name='Длительность видео'
     )
 
@@ -83,7 +85,7 @@ class ProductLessons(models.Model):
                 name='unique_ingredient',
             ),
         )
-        verbose_name = 'Количество уроков'
+        verbose_name_plural = 'Количество уроков в продукте'
         ordering = ['-id']
 
     def __str__(self):
@@ -107,5 +109,8 @@ class LessonStatus(models.Model):
         verbose_name='Урок',
         related_name='stat'
     )
-    duration = models.DurationField()
+    duration = models.DurationField(default=0)
     last_time_watched = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = 'Статус уроков'
